@@ -25,7 +25,7 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
         // set the attributes for the JSP
         request.setAttribute("firstNumber", firstnumber);
         request.setAttribute("lastNumber", lastnumber);
-
+        request.setAttribute("result", "---");
         // validation: if the parameters don't exist or are empty, show the form again
         if (firstnumber == null || firstnumber.equals("") && lastnumber == null || lastnumber.equals("")) {
             // Create a helpful message to send to the user
@@ -35,15 +35,42 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
             //display the agecalculator again
             getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response);
             return;//Very important! Stop the code call.
-        } else if (firstnumber.matches("[A-Za-z]") || lastnumber.matches("[A-Za-z]") || firstnumber.equals("") || lastnumber.equals("")) {
+        } else if (firstnumber.matches("^[A-Za-z]+$") || lastnumber.matches("^[A-Za-z]+$")) {
             // Create a helpful message to send to the user
             request.setAttribute("result", "invalid");
-            // forward the reuqest and response objects to the JSP
+            // forward the request and response objects to the JSP
             // display the form again
             getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response);
             return;// Very important! Stop the code call.
+        } else if ("+".equals(operator)) {
+            int math = Integer.parseInt(firstnumber) + Integer.parseInt(lastnumber);
+
+            request.setAttribute("result", math);
+
+            getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response);
+            return;
+        } else if ("-".equals(operator)) {
+            int math = Integer.parseInt(firstnumber) - Integer.parseInt(lastnumber);
+
+            request.setAttribute("result", math);
+
+            getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response);
+            return;
+        } else if ("*".equals(operator)) {
+            int math = Integer.parseInt(firstnumber) * Integer.parseInt(lastnumber);
+
+            request.setAttribute("result", math);
+
+            getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response);
+            return;
+        } else if ("%".equals(operator)) {
+            int math = Integer.parseInt(firstnumber) % Integer.parseInt(lastnumber);
+
+            request.setAttribute("result", math);
+
+            getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response);
+            return;
         } 
-       
 
         // display the arithmeticcalculator JSP
         getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response);

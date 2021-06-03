@@ -23,5 +23,6 @@
     </session-config>
     <welcome-file-list>
         <welcome-file>age</welcome-file>
+        <welcome-file>arithmetic</welcome-file>
     </welcome-file-list>
 </web-app>

@@ -34,7 +34,7 @@ public class AgeCalculatorServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp").forward(request, response);
             return;// Very important! Stop the code call.
         }
-        else if (age.matches(".*[a-z][A-z].*")) {
+        else if (age.matches("^[A-Za-z]+$")) {
             // Create a helpful message to send to the user
             request.setAttribute("message", "You must enter a number.");
             // forward the reuqest and response objects to the JSP
